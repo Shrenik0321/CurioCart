@@ -1,6 +1,5 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Badge from "@mui/material/Badge";
-import Box from "@mui/material/Box";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Navbar = () => {

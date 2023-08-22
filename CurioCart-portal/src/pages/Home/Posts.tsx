@@ -1,10 +1,10 @@
-import { Stack, Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import SinglePost from "./SinglePost";
 
 const Posts = () => {
   return (
-    <Stack>
-      <Grid container spacing={2} height={200}>
+    <Box height="123vh">
+      <Grid container spacing={3} height={200}>
         <SinglePost />
         <SinglePost />
         <SinglePost />
@@ -12,7 +12,7 @@ const Posts = () => {
         <SinglePost />
         <SinglePost />
       </Grid>
-    </Stack>
+    </Box>
   );
 };
 

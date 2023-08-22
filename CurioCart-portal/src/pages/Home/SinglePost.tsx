@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import headphone from "../../assets/headphones_c_1.webp";
 import { CardActionArea } from "@mui/material";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FitScreenOutlinedIcon from "@mui/icons-material/FitScreenOutlined";
 
 const SinglePost = () => {
   const [hovered, setHovered] = useState(false);
@@ -43,6 +45,44 @@ const SinglePost = () => {
             <Typography sx={{ fontSize: 14, fontWeight: "bold" }}>
               $99.99
             </Typography>
+            {hovered && (
+              <>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "65%",
+                    left: "40%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 1,
+                    padding: "2%",
+                    backgroundColor: "white",
+                    borderRadius: "50%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <ShoppingCartOutlinedIcon fontSize="small" />
+                </Box>
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "65%",
+                    left: "60%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 1,
+                    padding: "2%",
+                    backgroundColor: "white",
+                    borderRadius: "50%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FitScreenOutlinedIcon fontSize="small" />
+                </Box>
+              </>
+            )}
           </CardContent>
         </CardActionArea>
       </Card>

@@ -1,10 +1,10 @@
 import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Stack";
+import Stack from "@mui/material/Stack";
 import { Typography } from "@mui/material";
 
 const Billboard = () => {
   return (
-    <Box
+    <Stack
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -22,7 +22,7 @@ const Billboard = () => {
       <Typography variant="h2" fontWeight="semi-bold">
         Welcome to CurioCart!
       </Typography>
-    </Box>
+    </Stack>
   );
 };
 
