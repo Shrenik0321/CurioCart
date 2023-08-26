@@ -33,10 +33,10 @@ const Home = () => {
     <Box sx={{ marginY: "1%", marginX: "2%" }}>
       <Billboard />
       <Grid container spacing={1} sx={{ marginTop: "1%" }}>
-        <Grid item xs={4}>
+        <Grid item xs={3}>
           <Filter />
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={9}>
           <Stack>
             <Posts page={page} />
             <PostPagination />

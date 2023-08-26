@@ -1,0 +1,19 @@
+{
+  "name": "curiocart-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts'",
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "@types/node": "^20.5.6",
+    "nodemon": "^3.0.1"
+  }
+}

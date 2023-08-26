@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, FunctionComponent } from "react";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Modal, Typography, useMediaQuery } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import headphone from "../../assets/headphones_c_1.webp";
 import Divider from "@mui/material/Divider";
@@ -18,6 +17,7 @@ const PostModal: FunctionComponent<ModalProps> = ({
   setModalOpen,
 }) => {
   const handleClose = () => setModalOpen(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <Modal open={modalOpen} onClose={handleClose}>
@@ -27,7 +27,7 @@ const PostModal: FunctionComponent<ModalProps> = ({
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 600,
+          width: isMobile ? 300 : 600,
           bgcolor: "background.paper",
           border: "2px solid #000",
           boxShadow: 24,

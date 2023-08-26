@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useNavigate } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
 
 type Pages = {
   id: number;
@@ -31,13 +32,20 @@ const Navbar = () => {
         <Box>
           <Box sx={{ display: "flex", gap: 5 }}>
             <Box>
-              <Typography
-                variant="h5"
-                sx={{ cursor: "pointer", fontWeight: "bold" }}
-                onClick={() => navigate(`/`)}
-              >
-                CurioCart
-              </Typography>
+              <Box sx={{ display: "flex", gap: 1 }}>
+                <Box sx={{ cursor: "pointer", mt: 0.45 }}>
+                  <MenuIcon />
+                </Box>
+                <Box>
+                  <Typography
+                    variant="h5"
+                    sx={{ cursor: "pointer", fontWeight: "bold" }}
+                    onClick={() => navigate(`/`)}
+                  >
+                    CurioCart
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
             <Box
               sx={{
@@ -75,6 +83,7 @@ const Navbar = () => {
             paddingY: "0.2%",
             paddingX: "1%",
             borderRadius: "15px",
+            cursor: "pointer",
           }}
         >
           <Badge badgeContent={3} color="primary">

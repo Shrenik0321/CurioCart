@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { Box, Grid } from "@mui/material";
-import { Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  useMediaQuery,
+  Typography,
+  CardActionArea,
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import headphone from "../../assets/headphones_c_1.webp";
 import watches from "../../assets/watch_3.webp";
-import { CardActionArea } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FitScreenOutlinedIcon from "@mui/icons-material/FitScreenOutlined";
 import PostModal from "../Modal/Modal";
@@ -14,6 +18,7 @@ import PostModal from "../Modal/Modal";
 const SinglePost = ({ page }: any) => {
   const [hovered, setHovered] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -26,8 +31,7 @@ const SinglePost = ({ page }: any) => {
   return (
     <>
       <Grid item xs={4}>
-        {/* <Skeleton variant="rounded" height={180} /> */}
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: isMobile ? 255 : 275 }}>
           <CardActionArea
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

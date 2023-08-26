@@ -1,11 +1,141 @@
-import Skeleton from "@mui/material/Skeleton";
-import { Box } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 
 const Filter = () => {
   return (
-    <Box>
-      <Skeleton variant="rounded" sx={{ height: "125vh" }} />
-    </Box>
+    <Stack spacing={5}>
+      <Box>
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+            Sizes
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flexWrap: "wrap" }} gap={1}>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Medium
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Large
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Small
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Extra small
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box>
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
+            Colors
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flexWrap: "wrap" }} gap={1}>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Blue
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              White
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Red
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "none",
+                color: "black",
+                borderColor: "gray",
+                fontWeight: "bold",
+              }}
+              size="small"
+            >
+              Black
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    </Stack>
   );
 };
 
