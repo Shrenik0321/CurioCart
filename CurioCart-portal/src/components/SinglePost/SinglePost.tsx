@@ -1,17 +1,17 @@
 import { useState } from "react";
-import Skeleton from "@mui/material/Skeleton";
 import { Box, Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import headphone from "../../assets/headphones_c_1.webp";
+import watches from "../../assets/watch_3.webp";
 import { CardActionArea } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FitScreenOutlinedIcon from "@mui/icons-material/FitScreenOutlined";
-import PostModal from "../../components/Modal/Modal";
+import PostModal from "../Modal/Modal";
 
-const SinglePost = () => {
+const SinglePost = ({ page }: any) => {
   const [hovered, setHovered] = useState<boolean>(false);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -35,7 +35,7 @@ const SinglePost = () => {
             <CardMedia
               component="img"
               height="250"
-              image={headphone}
+              image={page === "Headphones" ? headphone : watches}
               alt="Headphone"
             />
             <CardContent>

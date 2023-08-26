@@ -1,15 +1,40 @@
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
-import { Box } from "@mui/material";
+
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/:page",
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <Box>
-      <Navbar />
-      <Home />
-      <Footer />
-    </Box>
+    <>
+      <RouterProvider router={router}></RouterProvider>
+    </>
   );
 }
 
