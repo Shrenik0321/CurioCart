@@ -1,3 +1,4 @@
-console.log("123");
+const start = "Hello!!";
+console.log(start);
 export {};
 //# sourceMappingURL=index.js.map
