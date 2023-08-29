@@ -1,7 +1,8 @@
-import { Box, Stack, Typography } from "@mui/material";
-import Button from "@mui/material/Button";
+import React from "react";
 
-const Filter = () => {
+import { Box, Stack, Typography, Button } from "@mui/material";
+
+const Filter: React.FC = () => {
   return (
     <Stack spacing={5}>
       <Box>

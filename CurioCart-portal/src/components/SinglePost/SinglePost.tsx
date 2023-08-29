@@ -1,23 +1,29 @@
-import { useState } from "react";
+import React from "react";
+
 import {
   Box,
   Grid,
   useMediaQuery,
   Typography,
   CardActionArea,
+  Card,
+  CardContent,
+  CardMedia,
 } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import headphone from "../../assets/headphones_c_1.webp";
-import watches from "../../assets/watch_3.webp";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FitScreenOutlinedIcon from "@mui/icons-material/FitScreenOutlined";
+
+import headphone from "../../assets/headphones_c_1.webp";
+import watches from "../../assets/watch_3.webp";
 import PostModal from "../Modal/Modal";
 
-const SinglePost = ({ page }: any) => {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+type SinglePostType = {
+  page: string;
+};
+
+const SinglePost: React.FC<SinglePostType> = ({ page }) => {
+  const [hovered, setHovered] = React.useState<boolean>(false);
+  const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const isMobile = useMediaQuery("(max-width:600px)");
 
   const handleMouseEnter = () => {

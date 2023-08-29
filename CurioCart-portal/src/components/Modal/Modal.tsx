@@ -1,18 +1,25 @@
-import { Dispatch, SetStateAction, FunctionComponent } from "react";
-import { Box, Modal, Typography, useMediaQuery } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import headphone from "../../assets/headphones_c_1.webp";
-import Divider from "@mui/material/Divider";
-import Button from "@mui/material/Button";
+import React from "react";
+
+import {
+  Box,
+  Modal,
+  Typography,
+  useMediaQuery,
+  Card,
+  CardMedia,
+  Divider,
+  Button,
+} from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+
+import headphone from "../../assets/headphones_c_1.webp";
 
 type ModalProps = {
   modalOpen: boolean;
-  setModalOpen: Dispatch<SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const PostModal: FunctionComponent<ModalProps> = ({
+const PostModal: React.FunctionComponent<ModalProps> = ({
   modalOpen,
   setModalOpen,
 }) => {

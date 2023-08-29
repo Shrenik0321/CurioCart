@@ -1,7 +1,14 @@
+import React from "react";
+
 import { Box, Stack, Grid, useMediaQuery } from "@mui/material";
+
 import SinglePost from "../SinglePost/SinglePost";
 
-const Posts = ({ page }: any) => {
+type PostsType = {
+  page: string;
+};
+
+const Posts: React.FC<PostsType> = ({ page }) => {
   const numberOfPosts = 6;
   const isMobile = useMediaQuery("(max-width:600px)");
 
