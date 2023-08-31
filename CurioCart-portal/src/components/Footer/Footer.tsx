@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Footer: React.FC = () => {
   return (
@@ -13,7 +13,11 @@ const Footer: React.FC = () => {
           padding: "1%",
         }}
       >
-        Footer
+        <Typography
+          sx={{ fontSize: "12px", fontWeight: "bold", color: "#334155" }}
+        >
+          CurioCart Inc. All rights reserved
+        </Typography>
       </Box>
     </Box>
   );

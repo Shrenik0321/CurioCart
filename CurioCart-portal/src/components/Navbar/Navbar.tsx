@@ -98,10 +98,11 @@ const Navbar: React.FC = () => {
             borderRadius: "15px",
             cursor: "pointer",
           }}
+          onClick={() => navigate("/shopping-cart")}
         >
           <Badge badgeContent={3} color="primary">
             <ShoppingCartOutlinedIcon
-              sx={{ color: "white" }}
+              sx={{ color: "white", cursor: "pointer" }}
               fontSize="small"
             />
           </Badge>
