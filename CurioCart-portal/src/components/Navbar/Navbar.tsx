@@ -37,12 +37,12 @@ const Navbar: React.FC = () => {
         <Box>
           <Box sx={{ display: "flex", gap: 5 }}>
             <Box>
-              <Box
-                sx={{ display: "flex", gap: 1 }}
-                onClick={() => setSidebarOpen(true)}
-              >
+              <Box sx={{ display: "flex", gap: 1 }}>
                 {isMobile ? (
-                  <Box sx={{ cursor: "pointer", mt: 0.45 }}>
+                  <Box
+                    sx={{ cursor: "pointer", mt: 0.45 }}
+                    onClick={() => setSidebarOpen(true)}
+                  >
                     <MenuRoundedIcon />
                   </Box>
                 ) : (

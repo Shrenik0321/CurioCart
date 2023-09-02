@@ -1,49 +1,32 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import watches from "../../assets/watch_3.webp";
+import React from "react";
 
-export default function ShoppingCart() {
+import { Box, Typography, Grid, Divider } from "@mui/material";
+
+import CartItem from "../../components/CartItem/CartItem";
+import Summary from "../../components/Summary/Summary";
+
+const ShoppingCart: React.FC = () => {
   return (
-    <Card sx={{ display: "flex", margin: 3 }}>
-      <CardMedia
-        component="img"
-        sx={{ width: 200 }}
-        image={watches}
-        alt="Live from space album cover"
-      />
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h6" sx={{ fontWeight: "bold" }}>
-            Headhphones
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            component="div"
-            sx={{ fontWeight: "bold" }}
-          >
-            $99.99
-          </Typography>
-        </CardContent>
-      </Box>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h6" sx={{ fontWeight: "bold" }}>
-            Order Summary
-          </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            component="div"
-            sx={{ fontWeight: "bold" }}
-          >
-            Order total
-          </Typography>
-        </CardContent>
-      </Box>
-    </Card>
+    <Box sx={{ flexGrow: 1, marginBottom: 6 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }}>
+        <Grid item xs={9}>
+          <Box sx={{ padding: 3 }}>
+            <Box sx={{ marginBottom: 2 }}>
+              <Typography variant="h5" sx={{ fontWeight: "bold" }}>
+                Shopping Cart
+              </Typography>
+            </Box>
+            <Divider />
+            <CartItem />
+          </Box>
+        </Grid>
+
+        <Grid item xs={3}>
+          <Summary />
+        </Grid>
+      </Grid>
+    </Box>
   );
-}
+};
+
+export default ShoppingCart;
