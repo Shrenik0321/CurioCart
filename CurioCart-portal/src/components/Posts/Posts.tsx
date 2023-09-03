@@ -3,27 +3,29 @@ import React from "react";
 import { Box, Stack, Grid, useMediaQuery } from "@mui/material";
 
 import SinglePost from "../SinglePost/SinglePost";
+import { useItemContext } from "../../hooks/useItemContext";
 
-type PostsType = {
-  page: string;
-};
-
-const Posts: React.FC<PostsType> = ({ page }) => {
-  const numberOfPosts = 6;
+const Posts: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const [item, setItem] = React.useState([]);
+  const { items } = useItemContext();
+
+  React.useEffect(() => {
+    setItem(items);
+  }, [items]);
 
   return (
     <Box sx={{ marginBottom: 5 }}>
       {isMobile ? (
         <Stack spacing={2}>
-          {Array.from({ length: numberOfPosts }, (_, index) => (
-            <SinglePost key={index} page={page} />
+          {item.map((post) => (
+            <SinglePost post={post} />
           ))}
         </Stack>
       ) : (
         <Grid container spacing={3}>
-          {Array.from({ length: numberOfPosts }, (_, index) => (
-            <SinglePost key={index} page={page} />
+          {item.map((post) => (
+            <SinglePost post={post} />
           ))}
         </Grid>
       )}

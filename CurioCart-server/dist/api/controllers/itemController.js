@@ -1,7 +1,7 @@
 import { Item } from "../models/ItemsModel.js";
 export const getAllItems = async (req, res) => {
     try {
-        const data = await Item.create(req.body);
+        const data = await Item.find();
         res.status(200).json(data);
     }
     catch (err) {

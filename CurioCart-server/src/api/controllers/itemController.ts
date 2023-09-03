@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 export const getAllItems = async (req: Request, res: Response) => {
   try {
-    const data = await Item.create(req.body);
+    const data = await Item.find();
     res.status(200).json(data);
   } catch (err) {
     console.error(err);

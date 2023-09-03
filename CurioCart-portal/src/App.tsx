@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import ShoppingCart from "./pages/Shopping-cart/ShoppingCart";
+import { ItemContextProvider } from "./context/ItemContext";
 
 const Layout = () => {
   return (
@@ -39,7 +40,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <ItemContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </ItemContextProvider>
     </>
   );
 }

@@ -12,16 +12,16 @@ import {
 } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FitScreenOutlinedIcon from "@mui/icons-material/FitScreenOutlined";
-
+import { ItemType } from "../../types";
 import headphone from "../../assets/headphones_c_1.webp";
-import watches from "../../assets/watch_3.webp";
+// import watches from "../../assets/watch_3.webp";
 import PostModal from "../Modal/Modal";
 
 type SinglePostType = {
-  page: string;
+  post: ItemType;
 };
 
-const SinglePost: React.FC<SinglePostType> = ({ page }) => {
+const SinglePost: React.FC<SinglePostType> = ({ post }) => {
   const [hovered, setHovered] = React.useState<boolean>(false);
   const [modalOpen, setModalOpen] = React.useState<boolean>(false);
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -34,6 +34,8 @@ const SinglePost: React.FC<SinglePostType> = ({ page }) => {
     setHovered(false);
   };
 
+  console.log(post);
+
   return (
     <>
       <Grid item xs={4}>
@@ -45,18 +47,18 @@ const SinglePost: React.FC<SinglePostType> = ({ page }) => {
             <CardMedia
               component="img"
               height="250"
-              image={page === "Headphones" ? headphone : watches}
+              image={headphone}
               alt="Headphone"
             />
             <CardContent>
               <Typography sx={{ fontSize: 16, fontWeight: "bold" }}>
-                Headphone
+                {post.itemName}
               </Typography>
               <Typography sx={{ fontSize: 12 }} color="text.secondary">
-                Technology
+                {post.itemCategory}
               </Typography>
               <Typography sx={{ fontSize: 14, fontWeight: "bold" }}>
-                $99.99
+                {`$${post.itemPrice}`}
               </Typography>
               {hovered && (
                 <>
