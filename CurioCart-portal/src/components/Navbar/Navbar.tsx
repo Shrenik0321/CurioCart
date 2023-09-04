@@ -4,24 +4,28 @@ import { Box, Typography, Badge, useMediaQuery } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useNavigate } from "react-router-dom";
+import { fetchAllItemCategories } from "../../services/FetchService";
 
 import Sidebar from "../Sidebar/Sidebar";
 
-type Pages = {
-  id: number;
-  page: string;
-  route: string;
+type ItemCategory = {
+  itemCategoryType: string;
 };
-
-const pages: Pages[] = [
-  { id: 1, page: "Headphones", route: "headphones" },
-  { id: 2, page: "Watches", route: "watches" },
-];
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width:600px)");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [itemCategory, setItemCategory] = React.useState<ItemCategory[]>([]);
+
+  React.useEffect(() => {
+    const fetchAllItemCategoriesFunc = async () => {
+      const response = await fetchAllItemCategories();
+      setItemCategory(response);
+    };
+
+    fetchAllItemCategoriesFunc();
+  }, []);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -67,25 +71,26 @@ const Navbar: React.FC = () => {
                   marginTop: "2%",
                 }}
               >
-                {pages.map((item) => (
-                  <Typography
-                    sx={{
-                      cursor: "pointer",
-                      transition: "font-weight 0.3s",
-                      fontWeight: "normal",
-                    }}
-                    variant="body2"
-                    onClick={() => navigate(`/${item.route}`)}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.fontWeight = "bold";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.fontWeight = "normal";
-                    }}
-                  >
-                    {item.page}
-                  </Typography>
-                ))}
+                {itemCategory &&
+                  itemCategory.map((item, index) => (
+                    <Typography
+                      key={index}
+                      sx={{
+                        cursor: "pointer",
+                        transition: "font-weight 0.3s",
+                        fontWeight: "normal",
+                      }}
+                      variant="body2"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.fontWeight = "bold";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.fontWeight = "normal";
+                      }}
+                    >
+                      {item.itemCategoryType}
+                    </Typography>
+                  ))}
               </Box>
             )}
           </Box>

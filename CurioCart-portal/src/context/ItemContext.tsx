@@ -27,7 +27,7 @@ export const itemReducer = (state: any, action: ReducerAction) => {
     case "LOAD_ALL_ITEMS": {
       return {
         ...state,
-        items: [...state.items, ...action.payload],
+        items: [...action.payload],
         loading: false,
       };
     }

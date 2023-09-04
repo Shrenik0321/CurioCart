@@ -34,8 +34,6 @@ const SinglePost: React.FC<SinglePostType> = ({ post }) => {
     setHovered(false);
   };
 
-  console.log(post);
-
   return (
     <>
       <Grid item xs={4}>

@@ -1,0 +1,1 @@
+{"version":3,"file":"ItemCategoryModel.js","sourceRoot":"","sources":["../../../src/api/models/ItemCategoryModel.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,UAAU,CAAC;AAEhC,MAAM,kBAAkB,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IAC7C,gBAAgB,EAAE,EAAE,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,IAAI,EAAE;CACnD,CAAC,CAAC;AAEH,MAAM,CAAC,MAAM,YAAY,GAAG,QAAQ,CAAC,KAAK,CACxC,iBAAiB,EACjB,kBAAkB,CACnB,CAAC"}

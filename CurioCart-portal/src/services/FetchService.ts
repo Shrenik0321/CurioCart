@@ -8,3 +8,12 @@ export async function fetchAllItems() {
     console.error(error);
   }
 }
+
+export async function fetchAllItemCategories() {
+  try {
+    const response = await baseAxios.get("/api/items/get-all-item-categories");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

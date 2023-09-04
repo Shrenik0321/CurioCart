@@ -24,8 +24,8 @@ const Posts: React.FC = () => {
         </Stack>
       ) : (
         <Grid container spacing={3}>
-          {item.map((post) => (
-            <SinglePost post={post} />
+          {item.map((post, index) => (
+            <SinglePost key={index} post={post} />
           ))}
         </Grid>
       )}

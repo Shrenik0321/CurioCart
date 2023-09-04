@@ -2,7 +2,7 @@ import React from "react";
 
 import { Box, Stack, Typography, Divider, Button } from "@mui/material";
 
-const Summary = () => {
+const Summary: React.FC = () => {
   return (
     <Box sx={{ padding: 3, backgroundColor: "#e7e5e4", height: "100%" }}>
       <Box sx={{ marginBottom: 2 }}>
