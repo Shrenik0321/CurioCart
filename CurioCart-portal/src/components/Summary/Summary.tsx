@@ -20,7 +20,7 @@ const Summary: React.FC = () => {
           </Box>
           <Box>
             <Typography variant="body2" sx={{ fontWeight: "semi-bold" }}>
-              1
+              Test
             </Typography>
           </Box>
         </Box>

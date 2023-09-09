@@ -8,12 +8,12 @@ import Posts from "../../components/Posts/Posts";
 import PostPagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 import { useItemContext } from "../../hooks/useItemContext";
-import { ReducerAction } from "../../types";
+import { ItemReducerAction } from "../../types";
 import { fetchAllItems } from "../../services/FetchService";
 
 const Home: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const { dispatch }: { dispatch: (action: ReducerAction) => void } =
+  const { dispatch }: { dispatch: (action: ItemReducerAction) => void } =
     useItemContext();
   const { loading } = useItemContext();
 

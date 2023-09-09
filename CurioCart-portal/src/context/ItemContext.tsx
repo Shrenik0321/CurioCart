@@ -1,12 +1,11 @@
 import { useEffect, createContext, useReducer, ReactNode } from "react";
-
-import { ReducerAction } from "../types";
+import { ItemType, ItemReducerAction } from "../types";
 
 export const ItemContext = createContext(null);
 
-type ItemStateType = {
+export type ItemStateType = {
   loading: boolean;
-  items: [];
+  items: ItemType[];
 };
 
 // Initial State
@@ -15,7 +14,7 @@ const initialState: ItemStateType = {
   items: [],
 };
 
-export const itemReducer = (state: any, action: ReducerAction) => {
+export const itemReducer = (state: any, action: ItemReducerAction) => {
   switch (action.type) {
     case "SET_LOADING": {
       return {

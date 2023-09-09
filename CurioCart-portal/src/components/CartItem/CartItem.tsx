@@ -12,8 +12,22 @@ import {
 } from "@mui/material";
 import watches from "../../assets/watch_3.webp";
 import CloseIcon from "@mui/icons-material/Close";
+import { CartItemsType } from "../../types";
+import { useCartItemsContext } from "../../hooks/useCartItemsContext";
+import { CartItemReducerAction } from "../../types";
 
-const CartItem: React.FC = () => {
+interface CartItemComponentProps {
+  cartItem: CartItemsType;
+}
+
+const CartItem: React.FC<CartItemComponentProps> = ({ cartItem }) => {
+  const { dispatch }: { dispatch: (action: CartItemReducerAction) => void } =
+    useCartItemsContext();
+
+  const handleClickClose = (cartItem: CartItemsType) => {
+    dispatch({ type: "REMOVE_ITEM_FROM_CART", payload: cartItem });
+  };
+
   return (
     <>
       <Card
@@ -43,7 +57,7 @@ const CartItem: React.FC = () => {
                   variant="h6"
                   sx={{ fontWeight: "bold" }}
                 >
-                  Headhphones
+                  {cartItem.itemName}
                 </Typography>
               </Box>
             </Grid>
@@ -60,12 +74,12 @@ const CartItem: React.FC = () => {
                   variant="h6"
                   sx={{ fontWeight: "bold" }}
                 >
-                  $99.99
+                  {`${cartItem.itemPrice}`}
                 </Typography>
               </Box>
             </Grid>
             <Grid item xs={1}>
-              <CloseIcon />
+              <CloseIcon onClick={() => handleClickClose(cartItem)} />
             </Grid>
           </Grid>
         </CardContent>

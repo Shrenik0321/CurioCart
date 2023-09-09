@@ -3,13 +3,18 @@ import React from "react";
 import { Box, Typography, Badge, useMediaQuery } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+
 import { useNavigate } from "react-router-dom";
 import { fetchAllItemCategories } from "../../services/FetchService";
-
+import { useCartItemsContext } from "../../hooks/useCartItemsContext";
 import Sidebar from "../Sidebar/Sidebar";
 
 type ItemCategory = {
   itemCategoryType: string;
+};
+
+type CartItemsType = {
+  cartItems: [];
 };
 
 const Navbar: React.FC = () => {
@@ -17,6 +22,7 @@ const Navbar: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [itemCategory, setItemCategory] = React.useState<ItemCategory[]>([]);
+  const { cartItems }: CartItemsType = useCartItemsContext();
 
   React.useEffect(() => {
     const fetchAllItemCategoriesFunc = async () => {
@@ -105,7 +111,7 @@ const Navbar: React.FC = () => {
           }}
           onClick={() => navigate("/shopping-cart")}
         >
-          <Badge badgeContent={3} color="primary">
+          <Badge badgeContent={cartItems.length} color="primary">
             <ShoppingCartOutlinedIcon
               sx={{ color: "white", cursor: "pointer" }}
               fontSize="small"

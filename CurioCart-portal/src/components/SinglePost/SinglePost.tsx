@@ -101,7 +101,11 @@ const SinglePost: React.FC<SinglePostType> = ({ post }) => {
           </CardActionArea>
         </Card>
       </Grid>
-      <PostModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <PostModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        post={post}
+      />
     </>
   );
 };

@@ -13,18 +13,28 @@ import {
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import headphone from "../../assets/headphones_c_1.webp";
+import { ItemType, CartItemReducerAction } from "../../types";
+import { useCartItemsContext } from "../../hooks/useCartItemsContext";
 
 type ModalProps = {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  post: ItemType;
 };
 
 const PostModal: React.FunctionComponent<ModalProps> = ({
   modalOpen,
   setModalOpen,
+  post,
 }) => {
   const handleClose = () => setModalOpen(false);
   const isMobile = useMediaQuery("(max-width:600px)");
+  const { dispatch }: { dispatch: (action: CartItemReducerAction) => void } =
+    useCartItemsContext();
+
+  const handleAddToCart = () => {
+    dispatch({ type: "ADD_ITEM_TO_CART", payload: post });
+  };
 
   return (
     <Modal open={modalOpen} onClose={handleClose}>
@@ -66,12 +76,12 @@ const PostModal: React.FunctionComponent<ModalProps> = ({
           >
             <Box>
               <Typography sx={{ fontSize: 24, fontWeight: "bold" }}>
-                Headphone
+                {post.itemName}
               </Typography>
             </Box>
             <Box>
               <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
-                $99.99
+                {`$${post.itemPrice}`}
               </Typography>
             </Box>
             <Divider />
@@ -96,6 +106,7 @@ const PostModal: React.FunctionComponent<ModalProps> = ({
               }}
               size="small"
               endIcon={<ShoppingCartOutlinedIcon />}
+              onClick={handleAddToCart}
             >
               Add To Cart
             </Button>

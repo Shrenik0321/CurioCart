@@ -4,11 +4,13 @@ import { Box, Stack, Grid, useMediaQuery } from "@mui/material";
 
 import SinglePost from "../SinglePost/SinglePost";
 import { useItemContext } from "../../hooks/useItemContext";
+import { ItemType } from "../../types";
+import { ItemStateType } from "../../context/ItemContext";
 
 const Posts: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const [item, setItem] = React.useState([]);
-  const { items } = useItemContext();
+  const [item, setItem] = React.useState<ItemType[]>([]);
+  const { items }: ItemStateType = useItemContext();
 
   React.useEffect(() => {
     setItem(items);
