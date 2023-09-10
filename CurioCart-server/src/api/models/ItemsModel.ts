@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
   itemType: { type: String, required: true },
   itemPrice: { type: Number, required: true },
   itemSize: { type: String, required: true },
-  iteDescription: { type: String, required: true },
+  itemDescription: { type: String },
   itemImageUrl: { type: String, required: true },
 });
 

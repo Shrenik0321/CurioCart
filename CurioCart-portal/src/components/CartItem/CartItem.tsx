@@ -10,7 +10,6 @@ import {
   Chip,
   Divider,
 } from "@mui/material";
-import watches from "../../assets/watch_3.webp";
 import CloseIcon from "@mui/icons-material/Close";
 import { CartItemsType } from "../../types";
 import { useCartItemsContext } from "../../hooks/useCartItemsContext";
@@ -41,7 +40,7 @@ const CartItem: React.FC<CartItemComponentProps> = ({ cartItem }) => {
         <CardMedia
           component="img"
           sx={{ width: 200 }}
-          image={watches}
+          image={cartItem.itemImageUrl}
           alt="Live from space album cover"
         />
         <CardContent

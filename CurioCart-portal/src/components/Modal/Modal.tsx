@@ -12,9 +12,9 @@ import {
 } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-import headphone from "../../assets/headphones_c_1.webp";
 import { ItemType, CartItemReducerAction } from "../../types";
 import { useCartItemsContext } from "../../hooks/useCartItemsContext";
+import { toast } from "react-toastify";
 
 type ModalProps = {
   modalOpen: boolean;
@@ -33,6 +33,10 @@ const PostModal: React.FunctionComponent<ModalProps> = ({
     useCartItemsContext();
 
   const handleAddToCart = () => {
+    handleClose();
+    toast.success(`${post.itemName} added to cart`, {
+      autoClose: 1500,
+    });
     dispatch({ type: "ADD_ITEM_TO_CART", payload: post });
   };
 
@@ -62,7 +66,7 @@ const PostModal: React.FunctionComponent<ModalProps> = ({
             <CardMedia
               component="img"
               height="250"
-              image={headphone}
+              image={post.itemImageUrl}
               alt="Headphone"
             />
           </Box>

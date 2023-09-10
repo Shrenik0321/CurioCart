@@ -13,8 +13,6 @@ import {
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FitScreenOutlinedIcon from "@mui/icons-material/FitScreenOutlined";
 import { ItemType } from "../../types";
-import headphone from "../../assets/headphones_c_1.webp";
-// import watches from "../../assets/watch_3.webp";
 import PostModal from "../Modal/Modal";
 
 type SinglePostType = {
@@ -45,7 +43,7 @@ const SinglePost: React.FC<SinglePostType> = ({ post }) => {
             <CardMedia
               component="img"
               height="250"
-              image={headphone}
+              image={post.itemImageUrl}
               alt="Headphone"
             />
             <CardContent>

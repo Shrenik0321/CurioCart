@@ -10,6 +10,8 @@ import Loader from "../../components/Loader/Loader";
 import { useItemContext } from "../../hooks/useItemContext";
 import { ItemReducerAction } from "../../types";
 import { fetchAllItems } from "../../services/FetchService";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home: React.FC = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
@@ -31,6 +33,7 @@ const Home: React.FC = () => {
         <Loader />
       ) : (
         <Box sx={{ marginY: "1%", marginX: "2%", overflowX: "hidden" }}>
+          <ToastContainer />
           <Billboard />
           {isMobile ? (
             <Box sx={{ marginTop: "2%" }} gap={2}>

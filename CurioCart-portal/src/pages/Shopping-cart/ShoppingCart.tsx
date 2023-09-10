@@ -20,7 +20,16 @@ const ShoppingCart: React.FC = () => {
     <Box sx={{ flexGrow: 1, marginBottom: 6 }}>
       <Grid container spacing={{ xs: 2, md: 3 }}>
         <Grid item xs={9}>
-          <Box sx={{ padding: 3 }}>
+          <Box
+            sx={{
+              padding: 3,
+              height: "75vh",
+              overflowY: "scroll",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+            }}
+          >
             <Box sx={{ marginBottom: 2 }}>
               <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                 Shopping Cart
@@ -34,7 +43,7 @@ const ShoppingCart: React.FC = () => {
         </Grid>
 
         <Grid item xs={3}>
-          <Summary />
+          <Summary cartItemsList={cartItemsList} />
         </Grid>
       </Grid>
     </Box>

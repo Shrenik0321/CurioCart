@@ -1,8 +1,21 @@
 import React from "react";
 
 import { Box, Stack, Typography, Divider, Button } from "@mui/material";
+import { CartItemsType } from "../../types";
 
-const Summary: React.FC = () => {
+type SummaryProps = {
+  cartItemsList: CartItemsType[];
+};
+
+const Summary: React.FC<SummaryProps> = ({ cartItemsList }) => {
+  function calculateOrderTotal(cartItemsList: CartItemsType[]) {
+    let total = 0;
+    for (let i = 0; i < cartItemsList.length; i++) {
+      total += cartItemsList[i].itemPrice;
+    }
+    return total;
+  }
+
   return (
     <Box sx={{ padding: 3, backgroundColor: "#e7e5e4", height: "100%" }}>
       <Box sx={{ marginBottom: 2 }}>
@@ -20,23 +33,23 @@ const Summary: React.FC = () => {
           </Box>
           <Box>
             <Typography variant="body2" sx={{ fontWeight: "semi-bold" }}>
-              Test
+              {cartItemsList.length}
             </Typography>
           </Box>
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box>
-            <Typography variant="body2" sx={{ fontWeight: "bold" }}>
-              Delivery Charge
-            </Typography>
+        {cartItemsList.map((item) => (
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box>
+              <Typography variant="body2" sx={{ fontWeight: "semi-bold" }}>
+                {item.itemName}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography variant="body2">{`$${item.itemPrice}`}</Typography>
+            </Box>
           </Box>
-          <Box>
-            <Typography variant="body2" sx={{ fontWeight: "semi-bold" }}>
-              $1.00
-            </Typography>
-          </Box>
-        </Box>
+        ))}
 
         <Divider />
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -47,7 +60,7 @@ const Summary: React.FC = () => {
           </Box>
           <Box>
             <Typography variant="body2" sx={{ fontWeight: "semi-bold" }}>
-              $99.99
+              {`$${calculateOrderTotal(cartItemsList)}`}
             </Typography>
           </Box>
         </Box>

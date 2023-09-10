@@ -1,10 +1,11 @@
 export type ItemType = {
-  itemName: String;
-  itemCategory: String;
-  itemType: String;
-  itemPrice: Number;
-  itemSize: String;
-  itemDescription: String;
+  itemName: string;
+  itemCategory: string;
+  itemType: string;
+  itemPrice: number;
+  itemSize: string;
+  itemDescription: string;
+  itemImageUrl: string;
 };
 
 export type ItemReducerAction = {
@@ -14,12 +15,13 @@ export type ItemReducerAction = {
 
 export type CartItemsType = {
   cartItems: ItemType[];
-  itemName: String;
-  itemCategory: String;
-  itemType: String;
-  itemPrice: Number;
-  itemSize: String;
-  itemDescription: String;
+  itemName: string;
+  itemCategory: string;
+  itemType: string;
+  itemPrice: number;
+  itemSize: string;
+  itemDescription: string;
+  itemImageUrl: string;
 };
 
 export type CartItemReducerAction = {
