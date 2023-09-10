@@ -6,6 +6,7 @@ const itemSchema = new mongoose.Schema({
     itemPrice: { type: Number, required: true },
     itemSize: { type: String, required: true },
     iteDescription: { type: String, required: true },
+    itemImageUrl: { type: String, required: true },
 });
 export const Item = mongoose.model("Items", itemSchema);
 //# sourceMappingURL=ItemsModel.js.map
