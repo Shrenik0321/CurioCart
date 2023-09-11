@@ -11,7 +11,7 @@ const Filter: React.FC = () => {
     "&:hover": {
       backgroundColor: "black",
       color: "white",
-      borderColor: "transparent", // Remove the default border color on hover
+      borderColor: "transparent",
     },
   };
 

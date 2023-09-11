@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarPropType> = ({ open }) => {
     },
     { name: "Categories", route: "/categories", icon: <CategoryIcon /> },
     { name: "Orders", route: "/orders", icon: <ShoppingCartIcon /> },
-    { name: "Products", route: "/products", icon: <InventoryIcon /> },
+    { name: "Items", route: "/items", icon: <InventoryIcon /> },
   ];
   const navigate = useNavigate();
 

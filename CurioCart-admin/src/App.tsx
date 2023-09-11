@@ -5,7 +5,8 @@ import Overview from "./pages/Overview/Overview";
 import Billboards from "./pages/Billboards/Billboards";
 import Categories from "./pages/Categories/Categories";
 import Orders from "./pages/Orders/Orders";
-import Products from "./pages/Products/Products";
+import Items from "./pages/Items/Items";
+import AddItem from "./pages/AddItem/AddItem";
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,12 @@ const router = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: "/products",
-        element: <Products />,
+        path: "/items",
+        element: <Items />,
+      },
+      {
+        path: "/add-new-item",
+        element: <AddItem />,
       },
     ],
   },

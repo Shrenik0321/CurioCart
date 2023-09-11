@@ -1,10 +1,14 @@
 import React from "react";
+import { Box, Typography } from "@mui/material";
 
 const Billboards: React.FC = () => {
   return (
-    <div>
-      <h1>Billboards</h1>
-    </div>
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+        Billboards
+      </Typography>
+      <Typography variant="body1">All store billboards.</Typography>
+    </Box>
   );
 };
 

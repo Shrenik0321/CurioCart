@@ -11,6 +11,7 @@ import { useTheme } from "@mui/material/styles";
 
 import Navbar from "../Navbar/Navbar";
 import { DrawerHeader, AppBar, Drawer } from "../../utils/LayoutStyles";
+import Footer from "../Footer/Footer";
 
 const Layout = () => {
   const [open, setOpen] = React.useState(false);
@@ -40,10 +41,11 @@ const Layout = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Dashboard
+            CurioCart
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -57,9 +59,13 @@ const Layout = () => {
         <Divider />
         <Navbar open={open} />
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Outlet />
+        <Box sx={{ mb: 3 }}>
+          <Outlet />
+        </Box>
+        <Footer />
       </Box>
     </Box>
   );

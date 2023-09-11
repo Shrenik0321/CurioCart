@@ -1,10 +1,14 @@
 import React from "react";
+import { Box, Typography } from "@mui/material";
 
 const Categories: React.FC = () => {
   return (
-    <div>
-      <h1>Categories</h1>
-    </div>
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+        Categories
+      </Typography>
+      <Typography variant="body1">All item categories</Typography>
+    </Box>
   );
 };
 
