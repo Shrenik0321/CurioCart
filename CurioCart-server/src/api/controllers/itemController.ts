@@ -3,7 +3,6 @@ import { ItemCategory } from "../models/ItemCategoryModel.js";
 import { Request, Response } from "express";
 import { firebaseStorage } from "../../config/firebaseConfig.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import fs from "fs";
 
 export const getAllItems = async (req: Request, res: Response) => {
   try {
@@ -27,37 +26,35 @@ export const getAllItemCategories = async (req: Request, res: Response) => {
 
 export const addItem = async (req: Request, res: Response) => {
   try {
-    const headphone =
-      "D:/Program Codes/VSCODE/CurioCart/CurioCart-server/src/assets/headphones_c_1.webp";
-    fs.readFile(headphone, async (err, data) => {
-      if (err) {
-        console.log("Error reading the file");
-        console.log(err);
-      } else {
-        // Convert data to ArrayBuffer
-        const arrayBuffer = data.buffer.slice(
-          data.byteOffset,
-          data.byteOffset + data.byteLength
-        );
+    const newItem = new Item({ ...req.body });
+    const addItem = await newItem.save();
+    const addedItemId = addItem._id.toString();
 
-        const metadata = {
-          contentType: "image/jpeg",
-        };
+    const imageFileObj = req.file;
+    if (!imageFileObj) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
 
-        const testRef = ref(firebaseStorage, `item-image/headphone`);
+    const metaData = {
+      contentType: imageFileObj?.mimetype,
+    };
 
-        const snapShot = await uploadBytesResumable(
-          testRef,
-          arrayBuffer,
-          metadata
-        );
+    const imageRef = ref(
+      firebaseStorage,
+      `item-image/${addedItemId}/${addItem.itemName}`
+    );
+    const snapShot = await uploadBytesResumable(
+      imageRef,
+      imageFileObj.buffer,
+      metaData
+    );
+    const imagePath = await getDownloadURL(snapShot.ref);
 
-        const filePath = await getDownloadURL(snapShot.ref);
-        console.log(filePath);
-      }
-    });
+    addItem.itemImageUrl = imagePath;
+    const addedItem = await addItem.save();
+
+    res.status(200).json(addedItem);
   } catch (err) {
-    console.log("here");
     console.log(err);
   }
 };
