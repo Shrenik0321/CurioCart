@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
   React.useEffect(() => {
     const fetchAllItemCategoriesFunc = async () => {
       const response = await fetchAllItemCategories();
-      setItemCategory(response);
+      setItemCategory(response.returnItems);
     };
 
     fetchAllItemCategoriesFunc();

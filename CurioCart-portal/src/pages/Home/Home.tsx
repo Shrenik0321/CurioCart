@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   React.useEffect(() => {
     const fetchAllItemsFunc = async () => {
       const response = await fetchAllItems();
-      dispatch({ type: "LOAD_ALL_ITEMS", payload: response });
+      dispatch({ type: "LOAD_ALL_ITEMS", payload: response.returnItems });
     };
     fetchAllItemsFunc();
   }, []);

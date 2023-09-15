@@ -6,21 +6,27 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export const getAllItems = async (req: Request, res: Response) => {
   try {
-    const data = await Item.find();
-    res.status(200).json(data);
+    let limit = req.body.limit
+      ? req.body.limit
+      : Number(process.env.DEFAULT_LIMIT);
+    let skip = req.body.skip ? req.body.skip : Number(process.env.DEFAULT_SKIP);
+    const returnItems = await Item.find();
+    res.status(200).json({ returnItems: returnItems });
   } catch (err) {
-    console.error(err);
-    res.send(err).status(500);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: err });
   }
 };
 
 export const getAllItemCategories = async (req: Request, res: Response) => {
   try {
-    const data = await ItemCategory.find();
-    res.status(200).json(data);
+    const returnItemCategories = await ItemCategory.find();
+    res.status(200).json({ returnItems: returnItemCategories });
   } catch (err) {
-    console.error(err);
-    res.send(err).status(500);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: err });
   }
 };
 
@@ -53,8 +59,10 @@ export const addItem = async (req: Request, res: Response) => {
     addItem.itemImageUrl = imagePath;
     const addedItem = await addItem.save();
 
-    res.status(200).json(addedItem);
+    res.status(200).json({ addedItem: addedItem });
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: err });
   }
 };
