@@ -7,6 +7,7 @@ import Categories from "./pages/Categories/Categories";
 import Orders from "./pages/Orders/Orders";
 import Items from "./pages/Items/Items";
 import AddItem from "./pages/AddItem/AddItem";
+import { ItemContextProvider } from "./context/ItemContext";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router}></RouterProvider>
+      <ItemContextProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </ItemContextProvider>
     </>
   );
 }

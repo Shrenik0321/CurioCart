@@ -7,3 +7,9 @@ export type ItemType = {
   itemDescription: string;
   itemImageUrl: string;
 };
+
+export type ItemReducerAction = {
+  type: string;
+  payload: ItemType[];
+  loading: boolean;
+};

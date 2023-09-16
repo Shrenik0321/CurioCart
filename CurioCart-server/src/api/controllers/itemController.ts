@@ -6,12 +6,21 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export const getAllItems = async (req: Request, res: Response) => {
   try {
-    let limit = req.body.limit
+    const limit = req.body.limit
       ? req.body.limit
       : Number(process.env.DEFAULT_LIMIT);
-    let skip = req.body.skip ? req.body.skip : Number(process.env.DEFAULT_SKIP);
+    const skip = req.body.skip
+      ? req.body.skip
+      : Number(process.env.DEFAULT_SKIP);
+
     const returnItems = await Item.find();
-    res.status(200).json({ returnItems: returnItems });
+    const returnItemsWithLimitSkip = await Item.find().limit(limit).skip(skip);
+    res
+      .status(200)
+      .json({
+        returnItems: returnItemsWithLimitSkip,
+        totalItemCount: returnItems.length,
+      });
   } catch (err) {
     return res
       .status(500)

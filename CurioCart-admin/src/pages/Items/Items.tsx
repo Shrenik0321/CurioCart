@@ -4,10 +4,19 @@ import { useNavigate } from "react-router-dom";
 import ItemTable from "../../components/ItemTable/ItemTable";
 import { fetchAllItems } from "../../services/FetchService";
 import PostPagination from "../../components/Pagination/Pagination";
+import { useItemContext } from "../../hooks/useItemContext";
+import Loader from "../../components/Loader/Loader";
+import { ItemReducerAction } from "../../types";
 
-const Products: React.FC = () => {
+const Items: React.FC = () => {
+  const [activePage, setActivePage] = React.useState(1);
   const navigate = useNavigate();
+  const { loading } = useItemContext();
   const [itemData, setItemData] = React.useState([]);
+  const [itemTotalCount, setItemTotalCount] = React.useState(0);
+  const { dispatch }: { dispatch: (action: ItemReducerAction) => void } =
+    useItemContext();
+  const itemPerPageCount: number = 1;
 
   const itemHeaders = [
     { name: "Item Name" },
@@ -19,47 +28,73 @@ const Products: React.FC = () => {
     { name: "Item Description" },
   ];
 
+  const fetchAllItemsFunc = async () => {
+    dispatch({
+      type: "SET_LOADING",
+      payload: [],
+      loading: true,
+    });
+    const response = await fetchAllItems({
+      limit: itemPerPageCount,
+      skip: (activePage - 1) * itemPerPageCount,
+    });
+    dispatch({
+      type: "LOAD_ALL_ITEMS",
+      payload: response.returnItems,
+      loading: false,
+    });
+    setItemData(response.returnItems);
+    setItemTotalCount(response.totalItemCount);
+  };
+
   React.useEffect(() => {
-    const fetchAllItemsFunc = async () => {
-      const response = await fetchAllItems();
-      setItemData(response.returnItems);
-    };
     fetchAllItemsFunc();
-  }, []);
+  }, [activePage]);
 
   return (
     <Box>
-      <Box sx={{ display: "flex", mb: 2, justifyContent: "space-between" }}>
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-            Items
-          </Typography>
-          <Typography variant="body1">All items from your store.</Typography>
-        </Box>
-        <Box>
-          <Button
-            variant="outlined"
-            sx={{
-              backgroundColor: "black",
-              color: "white",
-              borderColor: "transparent",
-              textTransform: "none",
-              "&:hover": {
-                backgroundColor: "black",
-                color: "white",
-                borderColor: "transparent",
-              },
-            }}
-            onClick={() => navigate("/add-new-item")}
-          >
-            Add new item
-          </Button>
-        </Box>
-      </Box>
-      <ItemTable itemData={itemData} itemHeaders={itemHeaders} />
-      <PostPagination />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Box sx={{ display: "flex", mb: 2, justifyContent: "space-between" }}>
+            <Box>
+              <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                Items
+              </Typography>
+              <Typography variant="body1">
+                All items from your store.
+              </Typography>
+            </Box>
+            <Box>
+              <Button
+                variant="outlined"
+                sx={{
+                  backgroundColor: "black",
+                  color: "white",
+                  borderColor: "transparent",
+                  textTransform: "none",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "white",
+                    borderColor: "transparent",
+                  },
+                }}
+                onClick={() => navigate("/add-new-item")}
+              >
+                Add new item
+              </Button>
+            </Box>
+          </Box>
+          <ItemTable itemData={itemData} itemHeaders={itemHeaders} />
+        </>
+      )}
+      <PostPagination
+        onPageChange={(page) => setActivePage(page)}
+        itemTotalCount={itemTotalCount}
+      />
     </Box>
   );
 };
 
-export default Products;
+export default Items;
