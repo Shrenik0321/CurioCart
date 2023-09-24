@@ -7,6 +7,8 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon,
+  Typography,
+  Stack,
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -14,6 +16,8 @@ import CategoryIcon from "@mui/icons-material/Category";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar";
+import { signOutFromGoogle } from "../../config/firebaseConfig";
 
 type NavbarPropType = {
   open: boolean;
@@ -33,8 +37,16 @@ const Navbar: React.FC<NavbarPropType> = ({ open }) => {
   ];
   const navigate = useNavigate();
 
+  const handleSignOut = () => {
+    signOutFromGoogle();
+    navigate("/");
+    localStorage.removeItem("name");
+    localStorage.removeItem("email");
+    localStorage.removeItem("profilePic");
+  };
+
   return (
-    <Box>
+    <Box sx={{ position: "relative", height: "100%" }}>
       <List>
         {listItems.map((item, index) => (
           <ListItem
@@ -67,6 +79,28 @@ const Navbar: React.FC<NavbarPropType> = ({ open }) => {
           </ListItem>
         ))}
       </List>
+      <ListItem
+        disablePadding
+        sx={{ position: "absolute", bottom: 0, width: "100%" }}
+      >
+        <ListItemButton
+          sx={{ justifyContent: "center" }}
+          onClick={handleSignOut}
+        >
+          <ListItemText>
+            <Stack direction="row" spacing={2}>
+              <Avatar
+                alt="Remy Sharp"
+                src={`${localStorage.getItem("profilePic")}`}
+                sx={{ width: 35, height: 35 }}
+              />
+              <Typography variant="body1">
+                {localStorage.getItem("name")}
+              </Typography>
+            </Stack>
+          </ListItemText>
+        </ListItemButton>
+      </ListItem>
     </Box>
   );
 };

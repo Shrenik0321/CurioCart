@@ -1,8 +1,9 @@
-import { Item } from "../models/ItemsModel.js";
-import { ItemCategory } from "../models/ItemCategoryModel.js";
 import { Request, Response } from "express";
-import { firebaseStorage } from "../../config/firebaseConfig.js";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {
+  getItems,
+  addItems,
+  getItemCategories,
+} from "../services/itemService.js";
 
 export const getAllItems = async (req: Request, res: Response) => {
   try {
@@ -13,14 +14,12 @@ export const getAllItems = async (req: Request, res: Response) => {
       ? req.body.skip
       : Number(process.env.DEFAULT_SKIP);
 
-    const returnItems = await Item.find();
-    const returnItemsWithLimitSkip = await Item.find().limit(limit).skip(skip);
-    res
-      .status(200)
-      .json({
-        returnItems: returnItemsWithLimitSkip,
-        totalItemCount: returnItems.length,
-      });
+    const { statusCode, totalItemCount, returnItems, message } = await getItems(
+      limit,
+      skip
+    );
+
+    res.status(statusCode).json({ returnItems, totalItemCount, message });
   } catch (err) {
     return res
       .status(500)
@@ -30,8 +29,9 @@ export const getAllItems = async (req: Request, res: Response) => {
 
 export const getAllItemCategories = async (req: Request, res: Response) => {
   try {
-    const returnItemCategories = await ItemCategory.find();
-    res.status(200).json({ returnItems: returnItemCategories });
+    const { statusCode, returnItems, message } = await getItemCategories();
+
+    res.status(statusCode).json({ returnItems: returnItems, message: message });
   } catch (err) {
     return res
       .status(500)
@@ -41,34 +41,12 @@ export const getAllItemCategories = async (req: Request, res: Response) => {
 
 export const addItem = async (req: Request, res: Response) => {
   try {
-    const newItem = new Item({ ...req.body });
-    const addItem = await newItem.save();
-    const addedItemId = addItem._id.toString();
+    const itemToAdd = { ...req.body };
+    const itemImageToAdd = req.file;
 
-    const imageFileObj = req.file;
-    if (!imageFileObj) {
-      return res.status(400).json({ message: "No file uploaded" });
-    }
+    const { statusCode, message } = await addItems(itemToAdd, itemImageToAdd);
 
-    const metaData = {
-      contentType: imageFileObj?.mimetype,
-    };
-
-    const imageRef = ref(
-      firebaseStorage,
-      `item-image/${addedItemId}/${addItem.itemName}`
-    );
-    const snapShot = await uploadBytesResumable(
-      imageRef,
-      imageFileObj.buffer,
-      metaData
-    );
-    const imagePath = await getDownloadURL(snapShot.ref);
-
-    addItem.itemImageUrl = imagePath;
-    const addedItem = await addItem.save();
-
-    res.status(200).json({ addedItem: addedItem });
+    res.status(statusCode).json({ message });
   } catch (err) {
     return res
       .status(500)

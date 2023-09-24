@@ -8,14 +8,24 @@ import Orders from "./pages/Orders/Orders";
 import Items from "./pages/Items/Items";
 import AddItem from "./pages/AddItem/AddItem";
 import { ItemContextProvider } from "./context/ItemContext";
+import SignIn from "./pages/SignIn/SignIn";
+import SignUp from "./pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <SignIn />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
   {
     path: "/",
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "/overview",
         element: <Overview />,
       },
       {

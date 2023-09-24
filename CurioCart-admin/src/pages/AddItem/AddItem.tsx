@@ -113,7 +113,7 @@ const AddItem: React.FC = () => {
               />
             </Grid>
 
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                 Color
               </Typography>
@@ -125,7 +125,7 @@ const AddItem: React.FC = () => {
                 size="small"
                 fullWidth
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={4}>
               <Typography variant="body1" sx={{ fontWeight: "bold" }}>

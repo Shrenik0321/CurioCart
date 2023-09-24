@@ -16,7 +16,7 @@ const Items: React.FC = () => {
   const [itemTotalCount, setItemTotalCount] = React.useState(0);
   const { dispatch }: { dispatch: (action: ItemReducerAction) => void } =
     useItemContext();
-  const itemPerPageCount: number = 1;
+  const itemPerPageCount: number = 2;
 
   const itemHeaders = [
     { name: "Item Name" },

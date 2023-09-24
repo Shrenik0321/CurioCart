@@ -3,6 +3,7 @@ import cors from "cors";
 import { SERVER_PORT } from "./config/envConfig.js";
 import connectDb from "./config/dbConfig.js";
 // Route Imports
+import auth from "./api/routes/authRoute.js";
 import items from "./api/routes/itemRoute.js";
 const app = express();
 app.use(express.json());
@@ -12,6 +13,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 // Defining Routes
+app.use("/api/auth", auth);
 app.use("/api/items", items);
 // Global Error Handling
 app.use((err, req, res, next) => {
