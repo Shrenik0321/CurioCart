@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { SERVER_PORT } from "./config/envConfig.js";
 import connectDb from "./config/dbConfig.js";
+import cookieParser from "cookie-parser";
 // Route Imports
 import auth from "./api/routes/authRoute.js";
 import items from "./api/routes/itemRoute.js";
@@ -12,6 +13,7 @@ const corsOptions = {
     origin: allowedOrigins,
 };
 app.use(cors(corsOptions));
+app.use(cookieParser());
 // Defining Routes
 app.use("/api/auth", auth);
 app.use("/api/items", items);

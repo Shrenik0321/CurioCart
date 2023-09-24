@@ -46,7 +46,7 @@ export const addItems = async (itemToAdd, itemImageToAdd) => {
         const snapShot = await uploadBytesResumable(imageRef, imageFileObj.buffer, metaData);
         const imagePath = await getDownloadURL(snapShot.ref);
         addItem.itemImageUrl = imagePath;
-        const addedItem = await addItem.save();
+        await addItem.save();
         return { statusCode: 200, message: "Successfully added item" };
     }
     catch (err) {

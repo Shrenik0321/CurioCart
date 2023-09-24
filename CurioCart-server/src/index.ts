@@ -3,6 +3,7 @@ import cors from "cors";
 import { Request, Response, NextFunction, Errback } from "express";
 import { SERVER_PORT } from "./config/envConfig.js";
 import connectDb from "./config/dbConfig.js";
+import cookieParser from "cookie-parser";
 
 // Route Imports
 import auth from "./api/routes/authRoute.js";
@@ -18,6 +19,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 // Defining Routes
 app.use("/api/auth", auth);
