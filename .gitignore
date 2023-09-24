@@ -1,4 +1,4 @@
 /node_modules
 package-lock.json
 .env
-CurioCart-admin\src\config\envConfig.ts
+CurioCart-admin/src/config/envConfig.ts
