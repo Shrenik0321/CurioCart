@@ -5,12 +5,14 @@ import ItemTable from "../../components/ItemTable/ItemTable";
 import { fetchAllItems } from "../../services/FetchService";
 import PostPagination from "../../components/Pagination/Pagination";
 import { useItemContext } from "../../hooks/useItemContext";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import Loader from "../../components/Loader/Loader";
 import { ItemReducerAction } from "../../types";
 
 const Items: React.FC = () => {
   const [activePage, setActivePage] = React.useState(1);
   const navigate = useNavigate();
+  const axiosPrivate = useAxiosPrivate();
   const { loading } = useItemContext();
   const [itemData, setItemData] = React.useState([]);
   const [itemTotalCount, setItemTotalCount] = React.useState(0);
@@ -34,7 +36,7 @@ const Items: React.FC = () => {
       payload: [],
       loading: true,
     });
-    const response = await fetchAllItems({
+    const response = await fetchAllItems(axiosPrivate, {
       limit: itemPerPageCount,
       skip: (activePage - 1) * itemPerPageCount,
     });

@@ -10,4 +10,13 @@ const baseAxios = axios.create({
   },
 });
 
-export default baseAxios;
+const axiosPrivate = axios.create({
+  baseURL: BACKEND_URL,
+  timeout: 50000, // timeout of 10 seconds
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
+export { baseAxios as default, axiosPrivate };

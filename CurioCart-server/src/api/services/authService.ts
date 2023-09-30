@@ -1,7 +1,53 @@
 import { Profile, ProfileType } from "../models/ProfileModel.js";
-import { JWT_SECRET } from "../../config/envConfig.js";
+import {
+  ACCESS_TOKEN_SECRET,
+  REFRESH_TOKEN_SECRET,
+} from "../../config/envConfig.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+export const refreshService = async (refreshToken: string) => {
+  try {
+    const decoded = jwt.verify(
+      refreshToken,
+      REFRESH_TOKEN_SECRET
+    ) as jwt.JwtPayload;
+
+    if (decoded.exp && Date.now() > decoded.exp * 1000) {
+      return {
+        statusCode: 401,
+        message: "Token expired, please log in again",
+        authStatus: false,
+      };
+    }
+
+    const foundUser = await Profile.find({ _id: decoded.UserInfo.userId });
+
+    if (!foundUser)
+      return { statusCode: 401, message: "Unauthorised", authStatus: false };
+
+    const accessToken = jwt.sign(
+      {
+        UserInfo: {
+          userId: foundUser[0]._id,
+        },
+      },
+      ACCESS_TOKEN_SECRET ?? "",
+      {
+        expiresIn: "10s",
+      }
+    );
+
+    return { statusCode: 201, accessToken, authStatus: true };
+  } catch (err) {
+    console.log(err);
+    return {
+      statusCode: 500,
+      message: "Internal server error",
+      authStatus: false,
+    };
+  }
+};
 
 export const registerUser = async (
   email: string,
@@ -43,13 +89,19 @@ export const loginUser = async (
 ): Promise<{
   statusCode: number;
   message: string;
-  token?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  authStatus: boolean;
 }> => {
   try {
     const existingProfile = await Profile.find({ email: email });
 
     if (existingProfile.length === 0) {
-      return { statusCode: 401, message: "Email doesn't exist, SignUp" };
+      return {
+        statusCode: 401,
+        message: "Email doesn't exist, SignUp",
+        authStatus: false,
+      };
     }
 
     const passwordMatch = await bcrypt.compare(
@@ -58,23 +110,53 @@ export const loginUser = async (
     );
 
     if (!passwordMatch) {
-      return { statusCode: 401, message: "Invalid email or password" };
+      return {
+        statusCode: 401,
+        message: "Invalid email or password",
+        authStatus: false,
+      };
     }
 
     const { _id } = existingProfile[0];
     const userId = _id.toString();
 
-    const token = jwt.sign({ userId: userId }, JWT_SECRET ?? "", {
-      expiresIn: "10h",
-    });
+    const accessToken = jwt.sign(
+      {
+        UserInfo: {
+          userId: userId,
+        },
+      },
+      ACCESS_TOKEN_SECRET ?? "",
+      {
+        expiresIn: "10s",
+      }
+    );
+
+    const refreshToken = jwt.sign(
+      {
+        UserInfo: {
+          userId: userId,
+        },
+      },
+      REFRESH_TOKEN_SECRET ?? "",
+      {
+        expiresIn: "1d",
+      }
+    );
 
     return {
       statusCode: 201,
       message: "Login successful",
-      token,
+      accessToken,
+      refreshToken,
+      authStatus: true,
     };
   } catch (err) {
     console.log(err);
-    return { statusCode: 500, message: "Internal server error" };
+    return {
+      statusCode: 500,
+      message: "Internal server error",
+      authStatus: false,
+    };
   }
 };

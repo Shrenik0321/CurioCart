@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../../config/envConfig.js";
+import { ACCESS_TOKEN_SECRET } from "../../config/envConfig.js";
 
 export const requireAuth = async (
   req: Request,
@@ -8,13 +8,20 @@ export const requireAuth = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies.jwt;
+    const authHeader = req.headers.authorization || req.headers.authorization;
+
+    if (!authHeader?.startsWith("Bearer ")) {
+      return res.status(401).json({ message: "Unauthorised" });
+    }
+
+    const token = authHeader.split(" ")[1];
+    // const token = req.cookies.jwt;
 
     if (!token) {
       return res.status(401).json({ error: "No token provided" });
     }
 
-    const decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload;
+    const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET) as jwt.JwtPayload;
 
     if (decoded.exp && Date.now() > decoded.exp * 1000) {
       return res
@@ -22,6 +29,7 @@ export const requireAuth = async (
         .json({ error: "Token expired, please log in again" });
     }
 
+    req.body.user = decoded;
     next();
   } catch (err) {
     return res.status(401).json({ message: "Request is not authorized" });

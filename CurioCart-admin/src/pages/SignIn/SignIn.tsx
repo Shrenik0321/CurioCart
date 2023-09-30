@@ -11,41 +11,47 @@ import {
   TextField,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { signInWithGoogle } from "../../config/firebaseConfig";
+// import { signInWithGoogle } from "../../config/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../services/AuthService";
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { AuthReducerAction } from "../../types";
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
-  const handleSignInWithGoogle = () => {
-    signInWithGoogle()
-      .then((result: any) => {
-        console.log("Signed in successfully:", result);
+  const { setAuth } = useAuthContext();
+  // const handleSignInWithGoogle = () => {
+  //   signInWithGoogle()
+  //     .then((result: any) => {
+  //       console.log("Signed in successfully:", result);
 
-        const firebaseAuthId: any = result?.uid;
-        const name: any = result?.user.displayName;
-        const email: any = result?.user.email;
-        const profilePic: any = result?.user.photoURL;
+  //       const firebaseAuthId: any = result?.uid;
+  //       const name: any = result?.user.displayName;
+  //       const email: any = result?.user.email;
+  //       const profilePic: any = result?.user.photoURL;
 
-        localStorage.setItem("name", name);
-        localStorage.setItem("email", email);
-        localStorage.setItem("profilePic", profilePic);
+  //       localStorage.setItem("name", name);
+  //       localStorage.setItem("email", email);
+  //       localStorage.setItem("profilePic", profilePic);
 
-        // const loginDetails = {
-        //   firebaseAuthId: firebaseAuthId,
-        //   name: name,
-        //   email: email,
-        //   profilePic: profilePic,
-        // };
-        // googleSignIn(loginDetails);
-        navigate("/overview");
-      })
-      .catch((error) => {
-        console.error("Error signing in:", error);
-      });
-  };
+  //       // const loginDetails = {
+  //       //   firebaseAuthId: firebaseAuthId,
+  //       //   name: name,
+  //       //   email: email,
+  //       //   profilePic: profilePic,
+  //       // };
+  //       // googleSignIn(loginDetails);
+  //       navigate("/overview");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error signing in:", error);
+  //     });
+  // };
 
-  const handleSignIn = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -54,11 +60,23 @@ const SignIn: React.FC = () => {
       password: data.get("password"),
     };
 
-    userSignIn(signInDetails);
+    try {
+      const response = await userSignIn(signInDetails);
+      setAuth(response);
+      navigate("/overview");
+    } catch (err) {
+      console.log(err);
+    }
+    // if (response.statusCode === 201 || 200) {
+    //   navigate("/overview");
+    // } else {
+    //   console.log("Error");
+    // }
   };
 
   return (
     <Container component="main" maxWidth="xs">
+      <ToastContainer />
       <Box
         sx={{
           marginTop: 8,
@@ -103,14 +121,14 @@ const SignIn: React.FC = () => {
             Sign In
           </Button>
 
-          <Button
+          {/* <Button
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             onClick={handleSignInWithGoogle}
           >
             Sign In with Google
-          </Button>
+          </Button> */}
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

@@ -11,6 +11,7 @@ app.use(express.json());
 const allowedOrigins = ["http://127.0.0.1:5174", "http://127.0.0.1:5173"];
 const corsOptions = {
     origin: allowedOrigins,
+    credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());

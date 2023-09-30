@@ -13,3 +13,8 @@ export type ItemReducerAction = {
   payload: ItemType[];
   loading: boolean;
 };
+
+export type AuthReducerAction = {
+  type: string;
+  isAuthenticated: boolean;
+};
