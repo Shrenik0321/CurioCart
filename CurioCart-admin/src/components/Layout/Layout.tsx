@@ -12,11 +12,8 @@ import { useTheme } from "@mui/material/styles";
 import Navbar from "../Navbar/Navbar";
 import { DrawerHeader, AppBar, Drawer } from "../../utils/LayoutStyles";
 import Footer from "../Footer/Footer";
-import { useAuthContext } from "../../hooks/useAuthContext";
-// import { refresh } from "../../services/AuthService";
 
 const Layout = () => {
-  const { auth, setAuth } = useAuthContext();
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const handleDrawerOpen = () => {
@@ -26,16 +23,6 @@ const Layout = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  React.useEffect(() => {
-    console.log(auth);
-    // async function verifyRefreshToken() {
-    //   const res = await refresh();
-    //   setAuth(res);
-    // }
-
-    // verifyRefreshToken();
-  }, []);
 
   return (
     <Box sx={{ display: "flex" }}>

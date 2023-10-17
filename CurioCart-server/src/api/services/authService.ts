@@ -34,7 +34,7 @@ export const refreshService = async (refreshToken: string) => {
       },
       ACCESS_TOKEN_SECRET ?? "",
       {
-        expiresIn: "10s",
+        expiresIn: "1d",
       }
     );
 
@@ -128,7 +128,7 @@ export const loginUser = async (
       },
       ACCESS_TOKEN_SECRET ?? "",
       {
-        expiresIn: "10s",
+        expiresIn: "1d",
       }
     );
 
@@ -140,7 +140,7 @@ export const loginUser = async (
       },
       REFRESH_TOKEN_SECRET ?? "",
       {
-        expiresIn: "1d",
+        expiresIn: "2d",
       }
     );
 

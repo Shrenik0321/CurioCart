@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Avatar,
   Button,
@@ -11,45 +10,16 @@ import {
   TextField,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-// import { signInWithGoogle } from "../../config/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { userSignIn } from "../../services/AuthService";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { AuthReducerAction } from "../../types";
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuthContext();
-  // const handleSignInWithGoogle = () => {
-  //   signInWithGoogle()
-  //     .then((result: any) => {
-  //       console.log("Signed in successfully:", result);
-
-  //       const firebaseAuthId: any = result?.uid;
-  //       const name: any = result?.user.displayName;
-  //       const email: any = result?.user.email;
-  //       const profilePic: any = result?.user.photoURL;
-
-  //       localStorage.setItem("name", name);
-  //       localStorage.setItem("email", email);
-  //       localStorage.setItem("profilePic", profilePic);
-
-  //       // const loginDetails = {
-  //       //   firebaseAuthId: firebaseAuthId,
-  //       //   name: name,
-  //       //   email: email,
-  //       //   profilePic: profilePic,
-  //       // };
-  //       // googleSignIn(loginDetails);
-  //       navigate("/overview");
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error signing in:", error);
-  //     });
-  // };
 
   const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -67,11 +37,6 @@ const SignIn: React.FC = () => {
     } catch (err) {
       console.log(err);
     }
-    // if (response.statusCode === 201 || 200) {
-    //   navigate("/overview");
-    // } else {
-    //   console.log("Error");
-    // }
   };
 
   return (
@@ -120,15 +85,6 @@ const SignIn: React.FC = () => {
           >
             Sign In
           </Button>
-
-          {/* <Button
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleSignInWithGoogle}
-          >
-            Sign In with Google
-          </Button> */}
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">

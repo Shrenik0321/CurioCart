@@ -20,7 +20,7 @@ export const refreshService = async (refreshToken) => {
                 userId: foundUser[0]._id,
             },
         }, ACCESS_TOKEN_SECRET ?? "", {
-            expiresIn: "10s",
+            expiresIn: "1d",
         });
         return { statusCode: 201, accessToken, authStatus: true };
     }
@@ -81,14 +81,14 @@ export const loginUser = async (email, password) => {
                 userId: userId,
             },
         }, ACCESS_TOKEN_SECRET ?? "", {
-            expiresIn: "10s",
+            expiresIn: "1d",
         });
         const refreshToken = jwt.sign({
             UserInfo: {
                 userId: userId,
             },
         }, REFRESH_TOKEN_SECRET ?? "", {
-            expiresIn: "1d",
+            expiresIn: "2d",
         });
         return {
             statusCode: 201,

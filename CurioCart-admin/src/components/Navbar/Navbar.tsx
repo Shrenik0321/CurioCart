@@ -17,7 +17,6 @@ import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import { signOutFromGoogle } from "../../config/firebaseConfig";
 import { userSignOut } from "../../services/AuthService";
 
 type NavbarPropType = {
@@ -40,11 +39,7 @@ const Navbar: React.FC<NavbarPropType> = ({ open }) => {
 
   const handleSignOut = () => {
     userSignOut();
-    // signOutFromGoogle();
     navigate("/");
-    // localStorage.removeItem("name");
-    // localStorage.removeItem("email");
-    // localStorage.removeItem("profilePic");
   };
 
   return (

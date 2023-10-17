@@ -1,18 +1,25 @@
 import baseAxios from "../utils/axios";
+import { AuthContextItems } from "../context/AuthContext";
 
 export async function fetchAllItems(
-  axiosPrivate: any,
+  auth: AuthContextItems | null,
   requestObject: {
     limit: number;
     skip: number;
   }
 ) {
   try {
-    const response = await axiosPrivate.post(
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      withCredentials: true,
+      Authorization: `Bearer ${auth?.accessToken}`,
+    };
+
+    const response = await baseAxios.post(
       "/api/items/get-all-items",
-      requestObject
+      requestObject,
+      { headers }
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -21,7 +28,15 @@ export async function fetchAllItems(
 
 export async function fetchAllItemCategories() {
   try {
-    const response = await baseAxios.post("/api/items/get-all-item-categories");
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      withCredentials: true,
+    };
+
+    const response = await baseAxios.post(
+      "/api/items/get-all-item-categories",
+      { headers }
+    );
     return response.data;
   } catch (error) {
     console.error(error);

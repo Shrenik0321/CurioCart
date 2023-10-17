@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode } from "react";
 
-type AuthContextItems = {
+export type AuthContextItems = {
   message: string;
   statusCode: number;
   authStatus: boolean;

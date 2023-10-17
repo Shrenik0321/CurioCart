@@ -11,6 +11,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import PageNotFound from "./components/Error/PageNotFound";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
+import PersistLogin from "./components/PersistLogin/PersistLogin";
 
 function App() {
   return (
@@ -21,14 +22,16 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
 
         {/* Protected Routes */}
-        <Route element={<RequireAuth />}>
-          <Route path="/" element={<Layout />}>
-            <Route path="/overview" element={<Overview />} />
-            <Route path="/billboards" element={<Billboards />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/items" element={<Items />} />
-            <Route path="/add-new-item" element={<AddItem />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/" element={<Layout />}>
+              <Route path="/overview" element={<Overview />} />
+              <Route path="/billboards" element={<Billboards />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/items" element={<Items />} />
+              <Route path="/add-new-item" element={<AddItem />} />
+            </Route>
           </Route>
         </Route>
 

@@ -72,13 +72,3 @@ export async function userSignOut() {
     console.error(error);
   }
 }
-
-export async function googleSignIn(loginInDetails: any) {
-  console.log(loginInDetails);
-  try {
-    const response = await baseAxios.post("/api/profile/login", loginInDetails);
-    console.log(response);
-  } catch (error) {
-    console.error(error);
-  }
-}
