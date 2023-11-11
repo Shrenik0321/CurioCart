@@ -4,6 +4,8 @@ import { Request, Response, NextFunction, Errback } from "express";
 import { SERVER_PORT } from "./config/envConfig.js";
 import connectDb from "./config/dbConfig.js";
 import cookieParser from "cookie-parser";
+import passport from "passport";
+import "./config/passportConfig.js";
 
 // Route Imports
 import auth from "./api/routes/authRoute.js";
@@ -11,6 +13,7 @@ import items from "./api/routes/itemRoute.js";
 
 const app = express();
 app.use(express.json());
+app.use(passport.initialize());
 
 const allowedOrigins = ["http://127.0.0.1:5174", "http://127.0.0.1:5173"];
 
