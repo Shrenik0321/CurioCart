@@ -42,3 +42,29 @@ export async function fetchAllItemCategories() {
     console.error(error);
   }
 }
+
+export async function fetchAllOrders(
+  auth: AuthContextItems | null,
+  requestObject?: {
+    limit: number;
+    skip: number;
+  }
+) {
+  try {
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      withCredentials: true,
+      Authorization: `Bearer ${auth?.accessToken}`,
+    };
+
+    const response = await baseAxios.post(
+      "/api/orders/get-all-orders",
+      requestObject,
+      { headers }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

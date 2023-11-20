@@ -8,6 +8,7 @@ import "./config/passportConfig.js";
 // Route Imports
 import auth from "./api/routes/authRoute.js";
 import items from "./api/routes/itemRoute.js";
+import orders from "./api/routes/orderRoute.js";
 const app = express();
 app.use(express.json());
 app.use(passport.initialize());
@@ -21,6 +22,7 @@ app.use(cookieParser());
 // Defining Routes
 app.use("/api/auth", auth);
 app.use("/api/items", items);
+app.use("/api/orders", orders);
 // Global Error Handling
 app.use((err, req, res, next) => {
     console.error(err);

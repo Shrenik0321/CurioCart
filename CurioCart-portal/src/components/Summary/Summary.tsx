@@ -16,6 +16,10 @@ const Summary: React.FC<SummaryProps> = ({ cartItemsList }) => {
     return total;
   }
 
+  function handleCheckout() {
+    console.log(cartItemsList);
+  }
+
   return (
     <Box sx={{ padding: 3, backgroundColor: "#e7e5e4", height: "100%" }}>
       <Box sx={{ marginBottom: 2 }}>
@@ -68,6 +72,7 @@ const Summary: React.FC<SummaryProps> = ({ cartItemsList }) => {
           <Button
             sx={{ backgroundColor: "black", width: "100%" }}
             variant="contained"
+            onClick={handleCheckout}
           >
             Checkout
           </Button>

@@ -25,7 +25,7 @@ type NavbarPropType = {
 
 const Navbar: React.FC<NavbarPropType> = ({ open }) => {
   const listItems = [
-    { name: "Overview", route: "/", icon: <DashboardIcon /> },
+    { name: "Overview", route: "/overview", icon: <DashboardIcon /> },
     {
       name: "Billboards",
       route: "/billboards",

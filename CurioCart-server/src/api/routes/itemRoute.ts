@@ -7,12 +7,10 @@ import express from "express";
 import { uploadStrategy } from "../middlewares/imageUploadStrategy.js";
 import { requireAuth } from "../middlewares/requireAuth.js";
 
-const router = express.Router();
+const itemRouter = express.Router();
 
-router.use(requireAuth);
+itemRouter.post("/get-all-items", getAllItems);
+itemRouter.post("/get-all-item-categories", getAllItemCategories);
+itemRouter.post("/add-item", requireAuth, uploadStrategy, addItem);
 
-router.post("/get-all-items", getAllItems);
-router.post("/get-all-item-categories", getAllItemCategories);
-router.post("/add-item", uploadStrategy, addItem);
-
-export default router;
+export default itemRouter;

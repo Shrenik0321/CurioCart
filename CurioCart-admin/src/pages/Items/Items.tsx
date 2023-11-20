@@ -18,7 +18,10 @@ const Items: React.FC = () => {
   const { dispatch }: { dispatch: (action: ItemReducerAction) => void } =
     useItemContext();
   const { auth } = useAuthContext();
-  const itemPerPageCount: number = 2;
+  const itemsPerPage: number = 5;
+  const startIndex = (activePage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedItems = itemData.slice(startIndex, endIndex);
 
   const itemHeaders = [
     { name: "Item Name" },
@@ -37,8 +40,8 @@ const Items: React.FC = () => {
       loading: true,
     });
     const response = await fetchAllItems(auth, {
-      limit: itemPerPageCount,
-      skip: (activePage - 1) * itemPerPageCount,
+      limit: itemsPerPage,
+      skip: (activePage - 1) * itemsPerPage,
     });
     dispatch({
       type: "LOAD_ALL_ITEMS",
@@ -88,12 +91,15 @@ const Items: React.FC = () => {
               </Button>
             </Box>
           </Box>
-          <ItemTable itemData={itemData} itemHeaders={itemHeaders} />
+          {itemData.length > 0 && (
+            <ItemTable itemData={displayedItems} itemHeaders={itemHeaders} />
+          )}
         </>
       )}
       <PostPagination
         onPageChange={(page) => setActivePage(page)}
         itemTotalCount={itemTotalCount}
+        itemsPerPage={itemsPerPage}
       />
     </Box>
   );

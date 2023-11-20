@@ -12,6 +12,10 @@ export async function refresh(): Promise<{
       withCredentials: true,
     });
 
+    const { accessToken } = response.data;
+
+    localStorage.setItem("accessToken", accessToken);
+
     return {
       message: response.data.message,
       statusCode: response.status,
@@ -35,6 +39,10 @@ export async function userSignIn(signInDetails: any): Promise<{
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
+
+    const { accessToken } = response.data;
+
+    localStorage.setItem("accessToken", accessToken);
 
     return {
       message: response.data.message,

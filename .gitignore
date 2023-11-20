@@ -2,3 +2,5 @@
 package-lock.json
 .env
 CurioCart-admin/src/config/envConfig.ts
+CurioCart-server/.env
+CurioCart-server/node_modules
