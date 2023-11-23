@@ -1,4 +1,4 @@
-import { Order } from "../models/ordersModel.js";
+import { Order } from "../models/orderModel.js";
 export const getOrders = async (limit, skip) => {
     try {
         const returnOrders = await Order.find();
@@ -16,9 +16,9 @@ export const getOrders = async (limit, skip) => {
         return { statusCode: 500, message: "Internal server error" };
     }
 };
-export const addOrders = async (orderToAdd) => {
+export const addOrders = async (orderedItems) => {
     try {
-        const newOrder = new Order({ ...orderToAdd });
+        const newOrder = new Order({ ...orderedItems });
         await newOrder.save();
         return { statusCode: 200, message: "Successfully added order" };
     }

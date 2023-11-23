@@ -1,4 +1,5 @@
 export type ItemType = {
+  _id: string;
   itemName: string;
   itemCategory: string;
   itemType: string;
@@ -14,6 +15,7 @@ export type ItemReducerAction = {
 };
 
 export type CartItemsType = {
+  _id: string;
   cartItems: ItemType[];
   itemName: string;
   itemCategory: string;
@@ -22,9 +24,11 @@ export type CartItemsType = {
   itemSize: string;
   itemDescription: string;
   itemImageUrl: string;
+  quantity: number;
 };
 
 export type CartItemReducerAction = {
   type: string;
-  payload: Object;
+  payload: ItemType;
+  quantity?: number;
 };

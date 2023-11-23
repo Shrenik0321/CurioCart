@@ -18,11 +18,12 @@ export const getAllOrders = async (req, res) => {
 };
 export const addOrder = async (req, res) => {
     try {
-        const orderToAdd = { ...req.body };
-        const { statusCode, message } = await addOrders(orderToAdd);
+        const orderedItems = req.body;
+        const { statusCode, message } = await addOrders(orderedItems);
         res.status(statusCode).json({ message });
     }
     catch (err) {
+        console.log(err);
         return res
             .status(500)
             .json({ message: "Internal server error", error: err });

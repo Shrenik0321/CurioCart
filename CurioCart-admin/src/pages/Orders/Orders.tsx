@@ -47,6 +47,10 @@ const Orders: React.FC = () => {
     fetchAllOrdersFunc();
   }, []);
 
+  React.useEffect(() => {
+    console.log(orderData);
+  }, [orderData]);
+
   return (
     <Box>
       {loading ? (

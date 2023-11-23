@@ -1,4 +1,4 @@
-import { Order, OrderType } from "../models/ordersModel.js";
+import { Order, OrderType } from "../models/orderModel.js";
 
 export const getOrders = async (
   limit: number,
@@ -27,13 +27,13 @@ export const getOrders = async (
 };
 
 export const addOrders = async (
-  orderToAdd: OrderType
+  orderedItems: OrderType
 ): Promise<{
   statusCode: number;
   message: string;
 }> => {
   try {
-    const newOrder = new Order({ ...orderToAdd });
+    const newOrder = new Order({ ...orderedItems });
     await newOrder.save();
     return { statusCode: 200, message: "Successfully added order" };
   } catch (err) {

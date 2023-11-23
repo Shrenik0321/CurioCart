@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
+import { itemSchema } from "./ItemsModel.js";
+const itemOrderSchema = new mongoose.Schema({
+    items: [itemSchema],
+    quantity: { type: Number },
+});
 const orderSchema = new mongoose.Schema({
-    itemId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Items",
-        required: true,
-    },
-    itemName: { type: String, required: true },
-    itemCategory: { type: String, required: true },
-    itemType: { type: String, required: true },
-    itemPrice: { type: Number, required: true },
-    itemSize: { type: String, required: true },
-    itemDescription: { type: String },
+    // customerId: { type: mongoose.Schema.Types.ObjectId },
+    items: { type: [itemOrderSchema] },
+    totalPrice: { type: Number },
 });
 export const Order = mongoose.model("Orders", orderSchema);
 //# sourceMappingURL=ordersModel.js.map

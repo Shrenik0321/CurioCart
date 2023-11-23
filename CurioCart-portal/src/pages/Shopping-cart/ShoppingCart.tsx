@@ -36,8 +36,8 @@ const ShoppingCart: React.FC = () => {
               </Typography>
             </Box>
             <Divider />
-            {cartItemsList.map((value) => (
-              <CartItem cartItem={value} />
+            {cartItemsList.map((value, index) => (
+              <CartItem key={index} cartItem={value} />
             ))}
           </Box>
         </Grid>

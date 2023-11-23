@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { addOrders, getOrders } from "../services/orderService.js";
+import { OrderType } from "../models/orderModel.js";
 
 export const getAllOrders = async (req: Request, res: Response) => {
   try {
@@ -23,12 +24,11 @@ export const getAllOrders = async (req: Request, res: Response) => {
 
 export const addOrder = async (req: Request, res: Response) => {
   try {
-    const orderToAdd = { ...req.body };
-
-    const { statusCode, message } = await addOrders(orderToAdd);
-
+    const orderedItems: OrderType = req.body;
+    const { statusCode, message } = await addOrders(orderedItems);
     res.status(statusCode).json({ message });
   } catch (err) {
+    console.log(err);
     return res
       .status(500)
       .json({ message: "Internal server error", error: err });
