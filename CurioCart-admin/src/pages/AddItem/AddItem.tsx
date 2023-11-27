@@ -3,7 +3,6 @@ import { Box, Typography, Grid, TextField, Button } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { addItem } from "../../services/AddService";
 import { toast, ToastContainer } from "react-toastify";
-import { AxiosResponse } from "axios";
 import { ItemReducerAction } from "../../types";
 import { useItemContext } from "../../hooks/useItemContext";
 
