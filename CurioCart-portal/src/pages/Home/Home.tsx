@@ -14,18 +14,42 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Home: React.FC = () => {
+  const [activePage, setActivePage] = React.useState(1);
+  const [itemData, setItemData] = React.useState([]);
+  const [itemTotalCount, setItemTotalCount] = React.useState(0);
+  const [displayedItems, setDisplayedItems] = React.useState([]);
   const isMobile = useMediaQuery("(max-width:600px)");
   const { dispatch }: { dispatch: (action: ItemReducerAction) => void } =
     useItemContext();
   const { loading } = useItemContext();
+  const itemsPerPage: number = 6;
+
+  const fetchAllItemsFunc = async () => {
+    dispatch({
+      type: "SET_LOADING",
+      payload: [],
+      loading: true,
+    });
+    const response = await fetchAllItems();
+    dispatch({
+      type: "LOAD_ALL_ITEMS",
+      payload: response.returnItems,
+      loading: false,
+    });
+    setItemTotalCount(response.returnItems.length);
+    setItemData(response.returnItems);
+  };
 
   React.useEffect(() => {
-    const fetchAllItemsFunc = async () => {
-      const response = await fetchAllItems();
-      dispatch({ type: "LOAD_ALL_ITEMS", payload: response.returnItems });
-    };
     fetchAllItemsFunc();
-  }, []);
+  }, [activePage]);
+
+  React.useEffect(() => {
+    const startIndex = (activePage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const updatedDisplayedItems = itemData.slice(startIndex, endIndex);
+    setDisplayedItems(updatedDisplayedItems);
+  }, [activePage, itemData]);
 
   return (
     <>
@@ -37,8 +61,13 @@ const Home: React.FC = () => {
           <Billboard />
           {isMobile ? (
             <Box sx={{ marginTop: "2%" }} gap={2}>
-              <Posts />
-              <PostPagination />
+              <Posts displayedItems={displayedItems} />
+              <PostPagination
+                onPageChange={(page) => setActivePage(page)}
+                itemTotalCount={itemTotalCount}
+                itemsPerPage={itemsPerPage}
+                currentPage={activePage}
+              />
             </Box>
           ) : (
             <Grid container spacing={1} sx={{ marginTop: "1%" }}>
@@ -47,8 +76,13 @@ const Home: React.FC = () => {
               </Grid>
               <Grid item xs={9}>
                 <Stack>
-                  <Posts />
-                  <PostPagination />
+                  <Posts displayedItems={displayedItems} />
+                  <PostPagination
+                    onPageChange={(page) => setActivePage(page)}
+                    itemTotalCount={itemTotalCount}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={activePage}
+                  />
                 </Stack>
               </Grid>
             </Grid>

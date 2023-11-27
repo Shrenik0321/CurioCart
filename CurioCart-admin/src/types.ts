@@ -6,16 +6,13 @@ export type ItemType = {
   itemSize: string;
   itemDescription: string;
   itemImageUrl: string;
+  quantity?: number;
 };
 
 export type OrderType = {
-  itemName: string;
-  itemCategory: string;
-  itemType: string;
-  itemPrice: number;
-  itemSize: string;
-  itemDescription: string;
-  itemImageUrl: string;
+  items: ItemType[];
+  totalCost: number;
+  customerId: number;
 };
 
 export type ItemReducerAction = {

@@ -24,12 +24,12 @@ const Items: React.FC = () => {
   const displayedItems = itemData.slice(startIndex, endIndex);
 
   const itemHeaders = [
+    { name: "Item Image" },
     { name: "Item Name" },
     { name: "Item Category" },
     { name: "Item Type" },
     { name: "Item Size" },
     { name: "Item Price" },
-    { name: "Item Image" },
     { name: "Item Description" },
   ];
 

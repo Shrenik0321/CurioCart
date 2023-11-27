@@ -35,21 +35,19 @@ const ItemTable: React.FC<ItemTable> = ({ itemData, itemHeaders }) => {
           <TableBody>
             {itemData.map((row) => (
               <TableRow>
+                <TableCell>
+                  <img
+                    src={row.itemImageUrl}
+                    alt="Item"
+                    style={{ maxWidth: "100px", maxHeight: "100px" }}
+                  />
+                </TableCell>
                 <TableCell>{row.itemName}</TableCell>
                 <TableCell>{row.itemCategory}</TableCell>
                 <TableCell>{row.itemType}</TableCell>
                 <TableCell>{row.itemSize}</TableCell>
                 <TableCell>{row.itemPrice}</TableCell>
                 <TableCell>{row.itemDescription}</TableCell>
-                <TableCell
-                  sx={{
-                    maxWidth: "150px",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {row.itemImageUrl}
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>

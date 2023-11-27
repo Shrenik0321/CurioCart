@@ -19,7 +19,7 @@ export const itemReducer = (state: any, action: ItemReducerAction) => {
     case "SET_LOADING": {
       return {
         ...state,
-        loading: true,
+        loading: action.loading,
       };
     }
 
@@ -27,7 +27,7 @@ export const itemReducer = (state: any, action: ItemReducerAction) => {
       return {
         ...state,
         items: [...action.payload],
-        loading: false,
+        loading: action.loading,
       };
     }
 
@@ -43,7 +43,7 @@ export const ItemContextProvider: React.FC<{ children: ReactNode }> = ({
   const [state, dispatch] = useReducer(itemReducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: "SET_LOADING", payload: [] });
+    dispatch({ type: "SET_LOADING", payload: [], loading: false });
   }, []);
 
   return (

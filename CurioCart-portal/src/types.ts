@@ -12,6 +12,7 @@ export type ItemType = {
 export type ItemReducerAction = {
   type: string;
   payload: ItemType[];
+  loading: boolean;
 };
 
 export type CartItemsType = {

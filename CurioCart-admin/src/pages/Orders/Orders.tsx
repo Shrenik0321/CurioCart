@@ -4,8 +4,8 @@ import { Box, Typography } from "@mui/material";
 import { fetchAllOrders } from "../../services/FetchService";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Loader from "../../components/Loader/Loader";
-import ItemTable from "../../components/ItemTable/ItemTable";
 import PostPagination from "../../components/Pagination/Pagination";
+import OrderTable from "../../components/OrderTable/OrderTable";
 
 const Orders: React.FC = () => {
   const [activePage, setActivePage] = React.useState(1);
@@ -18,14 +18,16 @@ const Orders: React.FC = () => {
   const endIndex = startIndex + ordersPerPage;
   const displayedItems = orderData.slice(startIndex, endIndex);
 
-  const itemHeaders = [
+  const orderHeaders = [
+    { name: "Item Image" },
     { name: "Item Name" },
     { name: "Item Category" },
     { name: "Item Type" },
     { name: "Item Size" },
     { name: "Item Price" },
-    { name: "Item Image" },
-    { name: "Item Description" },
+    { name: "Customer Name" },
+    { name: "Order Quantity" },
+    { name: "Total Price" },
   ];
 
   const fetchAllOrdersFunc = async () => {
@@ -47,10 +49,6 @@ const Orders: React.FC = () => {
     fetchAllOrdersFunc();
   }, []);
 
-  React.useEffect(() => {
-    console.log(orderData);
-  }, [orderData]);
-
   return (
     <Box>
       {loading ? (
@@ -64,7 +62,10 @@ const Orders: React.FC = () => {
             <Typography variant="body1">All store orders.</Typography>
           </Box>
           {orderData.length > 0 && (
-            <ItemTable itemData={displayedItems} itemHeaders={itemHeaders} />
+            <OrderTable
+              orderData={displayedItems}
+              orderHeaders={orderHeaders}
+            />
           )}
         </>
       )}
