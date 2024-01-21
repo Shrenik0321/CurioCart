@@ -16,7 +16,12 @@ const app = express();
 app.use(express.json());
 app.use(passport.initialize());
 
-const allowedOrigins = ["http://127.0.0.1:5174", "http://127.0.0.1:5173"];
+const allowedOrigins = [
+  "http://127.0.0.1:5174",
+  "http://127.0.0.1:5173",
+  "http://localhost:5174",
+  "http://localhost:5173",
+];
 
 const corsOptions = {
   origin: allowedOrigins,

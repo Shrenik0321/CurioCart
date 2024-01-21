@@ -34,15 +34,15 @@ const SinglePost: React.FC<SinglePostType> = ({ post }) => {
 
   return (
     <>
-      <Grid item xs={4}>
-        <Card sx={{ minWidth: isMobile ? 255 : 275 }}>
+      <Grid item xs={3}>
+        <Card sx={{ width: isMobile ? "200" : "220" }}>
           <CardActionArea
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
             <CardMedia
               component="img"
-              height="250"
+              height={isMobile ? "180" : "200"}
               image={post.itemImageUrl}
               alt="Headphone"
             />

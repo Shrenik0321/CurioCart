@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   const { dispatch }: { dispatch: (action: ItemReducerAction) => void } =
     useItemContext();
   const { loading } = useItemContext();
-  const itemsPerPage: number = 6;
+  const itemsPerPage: number = 8;
 
   const fetchAllItemsFunc = async () => {
     dispatch({
@@ -56,7 +56,14 @@ const Home: React.FC = () => {
       {loading ? (
         <Loader />
       ) : (
-        <Box sx={{ marginY: "1%", marginX: "2%", overflowX: "hidden" }}>
+        <Box
+          sx={{
+            paddingY: "1%",
+            paddingX: "2%",
+            overflowX: "hidden",
+            backgroundColor: "#f8fafc",
+          }}
+        >
           <ToastContainer />
           <Billboard />
           {isMobile ? (
